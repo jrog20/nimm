@@ -8,27 +8,29 @@ The last player to take a stone looses.
 """
 
 def main():
-    player_num = 1
-    num_stones = 20
+    player = 1
+    stones = 20
+    while stones > 0:
+        stones_remove = get_num_stones(stones, player)
+        player = change_player(player)
+        while stones_remove > 2 or stones_remove < 1:
+            stones_remove = int(input('Please enter 1 or 2: '))
+            print()
+        stones -= stones_remove
+    print(f'Player {player} wins!')
 
-    while num_stones > 0:
-        print("There are", num_stones, "stones left")
-        num_stones_remove = int(input("Player " + str(player_num) + " would you like to remove 1 or 2 stones? "))
-        print("")
+def get_num_stones(stones, player):
+    print(f'There are {stones} stones left')
+    stones_remove = int(input(f'Player {player} would you like to remove 1 or 2 stones? '))
+    print()
+    return stones_remove
 
-        if player_num == 1:
-            player_num += 1
-        else:
-            player_num -= 1
-
-        while num_stones_remove > 2 or num_stones_remove < 1:
-            num_stones_remove = int(input("Please enter 1 or 2: "))
-            print("")
-
-        num_stones -= num_stones_remove
-
-    print("Player " + str(player_num) + " wins!")
-
+def change_player(player):
+    if player == 1:
+        player = 2
+    else:
+        player = 1
+    return player
 
 if __name__ == '__main__':
     main()
